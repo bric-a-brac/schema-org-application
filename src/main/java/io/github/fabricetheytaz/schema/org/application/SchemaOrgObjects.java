@@ -2,6 +2,8 @@ package io.github.fabricetheytaz.schema.org.application;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 import io.github.fabricetheytaz.application.SimpleConsoleApplication;
 import io.github.fabricetheytaz.schema.org.AutoRepair;
@@ -12,6 +14,8 @@ import io.github.fabricetheytaz.schema.org.Organization;
 import io.github.fabricetheytaz.schema.org.PostalAddress;
 import io.github.fabricetheytaz.schema.org.Thing;
 import io.github.fabricetheytaz.schema.org.database.SchemaOrgDatabase;
+
+import static io.github.fabricetheytaz.util.Argument.notNull;
 
 /**
  * @version 0.1.0
@@ -24,7 +28,7 @@ public abstract class SchemaOrgObjects extends SimpleConsoleApplication
 	/**
 	 * @since 0.1.0
 	 */
-	protected SchemaOrgObjects() throws IOException, SQLException
+	public SchemaOrgObjects() throws IOException, SQLException
 		{
 		super();
 
@@ -36,23 +40,39 @@ public abstract class SchemaOrgObjects extends SimpleConsoleApplication
 	 */
 	protected final UnaryOperator<Thing> fillThing = thing ->
 		{
+		info("Thing");
+
+		setStringProperty("Nom", thing, thing::getName, thing::setName);
+		setStringProperty("Description", thing, thing::getDescription, thing::setDescription);
+
 		return thing;
 		};
 
 	/**
 	 * @since 0.1.0
 	 */
-	protected final UnaryOperator<ContactPoint> fillContactPoint = contactPoint ->
+	protected final UnaryOperator<ContactPoint> fillContactPoint = contact ->
 		{
-		return contactPoint;
+		info("ContactPoint");
+
+		setStringProperty("E-Mail", contact, contact::getEmail, contact::setEmail);
+		setStringProperty("Téléphone", contact, contact::getTelephone, contact::setTelephone);
+
+		return contact;
 		};
 
 	/**
 	 * @since 0.1.0
 	 */
-	protected final UnaryOperator<PostalAddress> fillPostalAddress = postalAddress ->
+	protected final UnaryOperator<PostalAddress> fillPostalAddress = address ->
 		{
-		return postalAddress;
+		info("PostalAddress");
+
+		setStringProperty("Rue", address, address::getStreetAddress, address::setStreetAddress);
+		setStringProperty("Code postal", address, address::getPostalCode, address::setPostalCode);
+		setStringProperty("Localité", address, address::getAddressLocality, address::setAddressLocality);
+
+		return address;
 		};
 
 	/**
@@ -60,6 +80,20 @@ public abstract class SchemaOrgObjects extends SimpleConsoleApplication
 	 */
 	protected final UnaryOperator<Organization> fillOrganization = organization ->
 		{
+		/*
+		info("Organization");
+		thing(organization);
+		final ContactPoint contact = new ContactPoint();
+		contactPoint(contact);
+		organization.setContactPoint(contact);
+
+		//final PostalAddress address = new PostalAddress();
+		//postalAddress(address);
+		//organization.setAddress(address);
+
+		setPostalAddress("Address", organization, organization::getAddress, organization::setAddress);
+		*/
+
 		return organization;
 		};
 
@@ -103,6 +137,9 @@ public abstract class SchemaOrgObjects extends SimpleConsoleApplication
 		return newLocalBusiness(new HairSalon());
 		}
 
+	/**
+	 * @since 0.1.0
+	 */
 	@Override
 	public void close()
 		{
@@ -117,4 +154,67 @@ public abstract class SchemaOrgObjects extends SimpleConsoleApplication
 			throw new RuntimeException(ex);
 			}
 		}
+
+	/**
+	 * @since 0.1.0
+	 */
+	private final <T extends Thing, V> void setProperty(final String name, final T thing, final Supplier<V> value, final Supplier<V> getter, final Consumer<V> setter)
+		{
+		notNull(name);
+		notNull(thing);
+		notNull(value);
+		notNull(getter);
+		notNull(setter);
+
+		System.out.print(name);
+
+		final V oldValue = getter.get();
+
+		if (oldValue != null)
+			{
+			System.out.print(" (" + oldValue + ")");
+			}
+
+		System.out.print(": ");
+
+		final V newValue = value.get();
+
+		if (newValue != null)
+			{
+			setter.accept(newValue);
+			}
+		}
+
+	/**
+	 * @since 0.1.0
+	 */
+	private final <T extends Thing> void setStringProperty(final String name, final T thing, final Supplier<String> getter, final Consumer<String> setter)
+		{
+		setProperty(name, thing, this::getString, getter, setter);
+		}
+
+	/**
+	 * @since 0.1.0
+	 */
+	@SuppressWarnings("unused")
+	private final <T extends Thing> void setFloatProperty(final String name, final T thing, final Supplier<Float> getter, final Consumer<Float> setter)
+		{
+		setProperty(name, thing, this::getFloat, getter, setter);
+		}
+
+	/**
+	 * @since 0.1.0
+	 */
+	@SuppressWarnings("unused")
+	private final <T extends Thing> void setDoubleProperty(final String name, final T thing, final Supplier<Double> getter, final Consumer<Double> setter)
+		{
+		setProperty(name, thing, this::getDouble, getter, setter);
+		}
+
+	/*
+	protected final <T extends Thing> void setPostalAddress(final String label, final T thing, final Supplier<PostalAddress> getter, final Consumer<PostalAddress> setter)
+		{
+		set(label, thing, this::newPostalAddress, getter, setter);
+		}
+	*/
 	}

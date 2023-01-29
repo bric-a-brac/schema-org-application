@@ -27,11 +27,6 @@
       <artifactId>schema-org-database</artifactId>
       <version>0.1.0-ALPHA</version>
     </dependency>
-	<dependency>
-      <groupId>io.github.fabricetheytaz</groupId>
-      <artifactId>websitegenerator</artifactId>
-      <version>0.1.0-ALPHA</version>
-    </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
