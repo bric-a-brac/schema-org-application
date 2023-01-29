@@ -1,0 +1,5 @@
+{
+"source": "../../SchemaOrg/schema.org/schema-org.sqlite",
+"destination": "../opendata-repository/docs/api",
+"templates": "templates"
+}

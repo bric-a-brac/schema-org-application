@@ -1,1 +1,3 @@
-# schema-org-application
+# Application Schema.org
+
+Application en mode console pour gérer une base de données d'objets Thing...
