@@ -31,9 +31,7 @@ public final class SchemaOrgApplication extends SchemaOrgObjects implements Fail
 		// TODO: Update ID... en cours
 		//final String sql = "UPDATE `thing` SET `json` = JSON_SET(`json`, '$.@id', `id`)";
 
-		InsertThing.insert(this, "HairSalon2");
-
-		//ShowThings.show(newAutoRepair());
+		//ThousandThingsGoal.goal(this);
 		}
 
 	/**

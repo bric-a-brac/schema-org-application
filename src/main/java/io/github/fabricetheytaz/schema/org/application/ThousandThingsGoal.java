@@ -1,5 +1,7 @@
 package io.github.fabricetheytaz.schema.org.application;
 
+import java.sql.SQLException;
+
 /**
  * Objectif 2023: 1000 objets Thing dans la base de données.
  * 
@@ -8,8 +10,17 @@ package io.github.fabricetheytaz.schema.org.application;
  */
 public final class ThousandThingsGoal
 	{
-	public static void goal(final SchemaOrgApplication application)
+	public static void goal(final SchemaOrgApplication application) throws SQLException
 		{
-		//application.database.insert(null)
+		final int count = application.database.getCount();
+
+		if (count == -1)
+			{
+			application.error("count = -1 ??????");
+			}
+
+		final Double percent = Double.valueOf((count * 100) / 1000f);
+
+		application.info(String.format("Object 1000 Things: %.2f %% (%d / 1000)", percent, Integer.valueOf(count)));
 		}
 	}

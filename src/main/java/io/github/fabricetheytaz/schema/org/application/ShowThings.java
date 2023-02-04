@@ -2,8 +2,7 @@ package io.github.fabricetheytaz.schema.org.application;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import io.github.fabricetheytaz.schema.org.SchemaOrg;
 import io.github.fabricetheytaz.schema.org.database.SchemaOrgDatabase;
 import io.github.fabricetheytaz.schema.org.types.Thing;
 
@@ -13,11 +12,9 @@ import io.github.fabricetheytaz.schema.org.types.Thing;
  */
 public final class ShowThings
 	{
-	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-
 	public static void show(final Thing thing)
 		{
-		System.out.println(GSON.toJson(thing));
+		System.out.println(SchemaOrg.toJSON(thing));
 		}
 
 	/**
