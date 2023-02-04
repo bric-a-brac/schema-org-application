@@ -12,11 +12,17 @@ import org.apache.commons.lang3.function.FailableRunnable;
  */
 public final class SchemaOrgApplication extends SchemaOrgObjects implements FailableRunnable<Exception>
 	{
-	protected SchemaOrgApplication() throws IOException, SQLException
+	/**
+	 * @since 0.1.0
+	 */
+	private SchemaOrgApplication() throws IOException, SQLException
 		{
 		super();
 		}
 
+	/**
+	 * @since 0.1.0
+	 */
 	@Override
 	public void run() throws Exception
 		{
@@ -25,10 +31,14 @@ public final class SchemaOrgApplication extends SchemaOrgObjects implements Fail
 		// TODO: Update ID... en cours
 		//final String sql = "UPDATE `thing` SET `json` = JSON_SET(`json`, '$.@id', `id`)";
 
-		//database.insert(newAutoRepair());
-		//database.insert(newHairSalon());
+		InsertThing.insert(this, "HairSalon2");
+
+		//ShowThings.show(newAutoRepair());
 		}
 
+	/**
+	 * @since 0.1.0
+	 */
 	public static void main(final String[] args)
 		{
 		try (final SchemaOrgApplication application = new SchemaOrgApplication())

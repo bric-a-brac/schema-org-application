@@ -2,29 +2,31 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>io.github.fabricetheytaz</groupId>
-  <artifactId>schema-org-application</artifactId>
+  <groupId>io.github.fabricetheytaz.schema.org</groupId>
+  <artifactId>application</artifactId>
   <version>0.1.0-ALPHA</version>
-  <name>Schema.org</name>
+  <name>Application Schema.org</name>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>15</maven.compiler.source>
     <maven.compiler.target>15</maven.compiler.target>
   </properties>
   <dependencies>
+    <!--
     <dependency>
       <groupId>commons-cli</groupId>
       <artifactId>commons-cli</artifactId>
       <version>1.5.0</version>
 	</dependency>
+    -->
 	<dependency>
       <groupId>io.github.fabricetheytaz</groupId>
       <artifactId>application</artifactId>
       <version>0.1.0-ALPHA</version>
     </dependency>
 	<dependency>
-      <groupId>io.github.fabricetheytaz</groupId>
-      <artifactId>schema-org-database</artifactId>
+      <groupId>io.github.fabricetheytaz.schema.org</groupId>
+      <artifactId>database</artifactId>
       <version>0.1.0-ALPHA</version>
     </dependency>
     <dependency>

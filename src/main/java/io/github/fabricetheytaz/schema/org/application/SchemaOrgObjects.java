@@ -6,14 +6,9 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 import io.github.fabricetheytaz.application.SimpleConsoleApplication;
-import io.github.fabricetheytaz.schema.org.AutoRepair;
-import io.github.fabricetheytaz.schema.org.ContactPoint;
-import io.github.fabricetheytaz.schema.org.HairSalon;
-import io.github.fabricetheytaz.schema.org.LocalBusiness;
-import io.github.fabricetheytaz.schema.org.Organization;
-import io.github.fabricetheytaz.schema.org.PostalAddress;
-import io.github.fabricetheytaz.schema.org.Thing;
 import io.github.fabricetheytaz.schema.org.database.SchemaOrgDatabase;
+
+import io.github.fabricetheytaz.schema.org.types.*;
 
 import static io.github.fabricetheytaz.util.Argument.notNull;
 
@@ -21,7 +16,7 @@ import static io.github.fabricetheytaz.util.Argument.notNull;
  * @version 0.1.0
  * @since 0.1.0
  */
-public abstract class SchemaOrgObjects extends SimpleConsoleApplication
+public abstract class SchemaOrgObjects extends SimpleConsoleApplication implements AutoCloseable
 	{
 	protected final SchemaOrgDatabase database;
 
@@ -141,18 +136,9 @@ public abstract class SchemaOrgObjects extends SimpleConsoleApplication
 	 * @since 0.1.0
 	 */
 	@Override
-	public void close()
+	public final void close() throws SQLException
 		{
-		super.close();
-
-		try
-			{
-			database.close();
-			}
-		catch (final SQLException ex)
-			{
-			throw new RuntimeException(ex);
-			}
+		database.close();
 		}
 
 	/**
