@@ -1,7 +1,5 @@
 package io.github.fabricetheytaz.schema.org.application;
 
-import java.sql.SQLException;
-
 /**
  * Objectif 2023: 1000 objets Thing dans la base de données.
  * 
@@ -10,6 +8,7 @@ import java.sql.SQLException;
  */
 public final class ThousandThingsGoal
 	{
+	/*
 	public static void goal(final SchemaOrgApplication application) throws SQLException
 		{
 		final int count = application.database.getCount();
@@ -23,4 +22,5 @@ public final class ThousandThingsGoal
 
 		application.info(String.format("Object 1000 Things: %.2f %% (%d / 1000)", percent, Integer.valueOf(count)));
 		}
+	*/
 	}
